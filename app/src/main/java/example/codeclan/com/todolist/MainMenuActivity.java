@@ -18,8 +18,8 @@ public class MainMenuActivity extends AppCompatActivity {
     public void onSeeTasksClick(View view) {
         Log.d(getClass().toString(), "onSeeTasksClick clicked");
 
-//        Intent intent = new Intent(this,       .class);
-//        startActivity(intent);
+        Intent intent = new Intent(this,TasksAllListActivity.class);
+        startActivity(intent);
     }
 
 }

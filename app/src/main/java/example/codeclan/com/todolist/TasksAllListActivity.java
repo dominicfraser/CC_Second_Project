@@ -1,0 +1,35 @@
+package example.codeclan.com.todolist;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
+
+import example.codeclan.com.todolist.R;
+import example.codeclan.com.todolist.TaskList;
+import example.codeclan.com.todolist.TasksAllListAdapter;
+
+public class TasksAllListActivity extends AppCompatActivity {
+
+    private TaskList taskList;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tasks_all_list);
+        Log.d(getClass().toString(), "onCreate for TasksAllListActivity");
+
+        taskList = new TaskList();
+        taskList.addToList(new Task(1,"description 1","long description 1",PriorityLevel.HIGH,false));
+        taskList.addToList(new Task(2,"description 2","long description 2",PriorityLevel.LOW,true));
+        Intent intent = getIntent();
+
+        TasksAllListAdapter tasksAllListAdapter = new TasksAllListAdapter(this, taskList.getList());
+
+        ListView listView = (ListView) findViewById(R.id.tasks_all_list);
+
+        listView.setAdapter(tasksAllListAdapter);
+
+    }
+}
