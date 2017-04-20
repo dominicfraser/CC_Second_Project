@@ -2,28 +2,33 @@ package example.codeclan.com.todolist;
 
 import android.renderscript.RenderScript;
 
+import java.util.ArrayList;
+
 /**
  * Created by user on 20/04/2017.
  */
 
 public class Task {
 
-    private int id;
+    private long id;
     private String shortDescription;
     private String longDescription;
     private PriorityLevel priority;
     private boolean completed;
 
-    public Task(String shortDescription, String longDescription, PriorityLevel priority){
+    public Task(long id, String shortDescription, String longDescription, PriorityLevel priority, boolean completed) {
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
         this.priority = priority;
-        this.id = 0;
-        this.completed = false;
-
+        this.id = id;
+        this.completed = completed;
     }
 
-    public int getId(){
+    public Task(String shortDescription, String longDescription, PriorityLevel priority){
+        this(0, shortDescription, longDescription, priority, false);
+    }
+
+    public long getId(){
         return this.id;
     }
 
@@ -43,7 +48,7 @@ public class Task {
         return this.completed;
     }
 
-    public void setId(int id){
+    public void setId(long id){
         this.id = id;
     }
 
@@ -62,5 +67,5 @@ public class Task {
     public void setCompleted(boolean status){
         this.completed = status;
     }
-            
+
 }
