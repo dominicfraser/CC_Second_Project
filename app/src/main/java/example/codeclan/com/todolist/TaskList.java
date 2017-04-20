@@ -12,4 +12,20 @@ public class TaskList {
     public TaskList(){
         this.list = new ArrayList<Task>();
     }
+
+    public ArrayList<Task> getList(){
+        return new ArrayList<Task>(list);
+    }
+
+    public void addToList(Task task){
+        list.add(task);
+    }
+
+    public int sizeOfList(){
+        return list.size();
+    }
+
+    public Task entry(int index) {
+        return list.get(index);
+    }
 }
