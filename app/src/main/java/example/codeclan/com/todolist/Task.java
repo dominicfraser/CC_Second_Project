@@ -18,7 +18,49 @@ public class Task {
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
         this.priority = priority;
+        this.id = 0;
+        this.completed = false;
+
     }
 
+    public int getId(){
+        return this.id;
+    }
 
+    public String getShortDescription(){
+        return this.shortDescription;
+    }
+
+    public String getLongDescription(){
+        return this.longDescription;
+    }
+
+    public PriorityLevel getPriority(){
+        return this.priority;
+    }
+
+    public boolean getCompleted(){
+        return this.completed;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public void setShortDescription(String description){
+        this.shortDescription = description;
+    }
+
+    public void setLongDescription(String description){
+        this.longDescription = description;
+    }
+
+    public void setPriority(PriorityLevel priority){
+        this.priority = priority;
+    }
+
+    public void setCompleted(boolean status){
+        this.completed = status;
+    }
+            
 }
