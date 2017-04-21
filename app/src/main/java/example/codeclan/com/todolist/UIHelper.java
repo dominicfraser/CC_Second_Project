@@ -13,8 +13,8 @@ import android.widget.EditText;
 
 public class UIHelper {
 
-    public static void hideKeyBoardWhenNotFocused(final Context context, View view){
-        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+    public static void hideKeyBoardWhenNotFocused(final Context context, EditText editText){
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {

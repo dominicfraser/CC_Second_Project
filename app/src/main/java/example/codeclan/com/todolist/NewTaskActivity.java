@@ -28,7 +28,8 @@ public class NewTaskActivity extends AppCompatActivity {
         long_description = (EditText) findViewById(R.id.new_long_description);
         priority_spinner = (Spinner) findViewById(R.id.new_priority);
 
-        UIHelper.hideKeyBoardWhenNotFocused(this, findViewById(R.id.main_new));
+        UIHelper.hideKeyBoardWhenNotFocused(this, short_description);
+        UIHelper.hideKeyBoardWhenNotFocused(this, long_description);
     }
 
     public void onSaveNewTaskClick(View view){
