@@ -1,14 +1,18 @@
 package example.codeclan.com.todolist;
 
+import android.app.DatePickerDialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+
+import java.util.Calendar;
 
 import example.codeclan.com.todolist.database.DatabaseHandler;
 
@@ -17,6 +21,11 @@ public class NewTaskActivity extends AppCompatActivity {
     private EditText short_description;
     private EditText long_description;
     private Spinner priority_spinner;
+
+    private EditText text_date_picker;
+    private DatePicker new_task_date_picker;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +37,12 @@ public class NewTaskActivity extends AppCompatActivity {
         long_description = (EditText) findViewById(R.id.new_long_description);
         priority_spinner = (Spinner) findViewById(R.id.new_priority);
 
+        new_task_date_picker = (DatePicker) findViewById(R.id.new_task_date_picker);
+
         UIHelper.hideKeyBoardWhenNotFocused(this, short_description);
         UIHelper.hideKeyBoardWhenNotFocused(this, long_description);
+
+
     }
 
     public void onSaveNewTaskClick(View view){
@@ -47,6 +60,12 @@ public class NewTaskActivity extends AppCompatActivity {
         Intent intent = new Intent(this,TasksAllListActivity.class);
         startActivity(intent);
     }
+
+    public void onNewTaskDateClick(View view){
+        DialogFragment picker = new DatePickerFragment();
+        picker.show(getFragmentManager(), "datePicker");
+    }
+
 
 
 }

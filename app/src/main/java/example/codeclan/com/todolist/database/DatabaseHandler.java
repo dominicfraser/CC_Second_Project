@@ -27,6 +27,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_LONGDESCRIPTION = "longDescription";
     private static final String KEY_PRIORITYLEVEL = "priority";
     private static final String KEY_COMPLETED = "completed";
+    private static final String KEY_TIMESTAMP = "timeStamp";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -37,7 +38,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_TASKLIST_TABLE = "CREATE TABLE " + TABLE_TASKLIST + "(" + KEY_ID
                 + " INTEGER PRIMARY KEY," + KEY_SHORTDESCRIPTION + " TEXT," +
                 KEY_LONGDESCRIPTION + " TEXT," + KEY_PRIORITYLEVEL + " TEXT," +
-                KEY_COMPLETED + " BOOLEAN" + ")";
+                KEY_COMPLETED + " BOOLEAN," + KEY_TIMESTAMP + "TIMESTAMP DEFAULT CURRENT_TIMESTAMP" + ")";
         db.execSQL(CREATE_TASKLIST_TABLE);
     }
 //UPGRADE DATABASE
@@ -57,7 +58,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_PRIORITYLEVEL, task.getPriority().toString());
         values.put(KEY_COMPLETED, task.getCompleted());
 
-        task.setId( db.insert(TABLE_TASKLIST, null, values) );
+        db.insert(TABLE_TASKLIST, null, values);
         db.close();
     }
 //GET/READ TASK
@@ -65,7 +66,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_TASKLIST, new String[] {KEY_ID, KEY_SHORTDESCRIPTION,
-        KEY_LONGDESCRIPTION, KEY_PRIORITYLEVEL, KEY_COMPLETED}, KEY_ID + "=?",
+        KEY_LONGDESCRIPTION, KEY_PRIORITYLEVEL, KEY_COMPLETED, KEY_TIMESTAMP}, KEY_ID + "=?",
                 new String[] {String.valueOf(id) }, null, null, null, null);
 
         if(cursor != null)
@@ -74,7 +75,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Task task = new Task(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2), Enum.valueOf(PriorityLevel.class,
-                cursor.getString(3)), cursor.getInt(4)!=0 );
+                cursor.getString(3)), cursor.getInt(4)!=0, cursor.getLong(5) );
         return task;
     }
 // GET/READ ALL TASKS
@@ -88,7 +89,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         while(cursor.moveToNext()){
             list.addToList(new Task(Integer.parseInt(cursor.getString(0)),
                     cursor.getString(1), cursor.getString(2), Enum.valueOf(PriorityLevel.class,
-                    cursor.getString(3)), cursor.getInt(4)!=0 ));
+                    cursor.getString(3)), cursor.getInt(4)!=0, cursor.getLong(5) ));
         }
 
         cursor.close();

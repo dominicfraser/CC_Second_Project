@@ -15,17 +15,20 @@ public class Task {
     private String longDescription;
     private PriorityLevel priority;
     private boolean completed;
+    private long timeStamp;
 
-    public Task(long id, String shortDescription, String longDescription, PriorityLevel priority, boolean completed) {
+    public Task(long id, String shortDescription, String longDescription, PriorityLevel priority, boolean completed, long timeStamp) {
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
         this.priority = priority;
         this.id = id;
         this.completed = completed;
+        this.timeStamp = System.currentTimeMillis();
+
     }
 
     public Task(String shortDescription, String longDescription, PriorityLevel priority){
-        this(0, shortDescription, longDescription, priority, false);
+        this(0, shortDescription, longDescription, priority, false, System.currentTimeMillis());
     }
 
     public long getId(){
@@ -48,6 +51,10 @@ public class Task {
         return this.completed;
     }
 
+    public long getTimeStamp(){
+        return this.timeStamp;
+    }
+
     public void setId(long id){
         this.id = id;
     }
@@ -66,6 +73,10 @@ public class Task {
 
     public void setCompleted(boolean status){
         this.completed = status;
+    }
+
+    public void setTimeStamp(long timeStamp){
+        this.timeStamp = System.currentTimeMillis();
     }
 
 }

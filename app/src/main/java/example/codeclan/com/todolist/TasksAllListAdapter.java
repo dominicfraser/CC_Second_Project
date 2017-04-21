@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by user on 20/04/2017.
@@ -30,6 +31,9 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
         TextView task_in_list_short_description = (TextView) listItemView.findViewById(R.id.task_in_list_short_description);
         task_in_list_short_description.setText(task.getShortDescription().toString());
 
+        TextView task_in_list_timestamp = (TextView) listItemView.findViewById(R.id.task_in_list_timestamp);
+        Date timeStamp = new Date(task.getTimeStamp());
+        task_in_list_timestamp.setText(timeStamp.toString());
 
         listItemView.setTag(task);
 

@@ -29,8 +29,8 @@ public class TasksAllListActivity extends AppCompatActivity {
 
 
 //        taskList = new TaskList();
-        taskList.addToList(new Task(1,"description 1","long description 1",PriorityLevel.HIGH,false));
-        taskList.addToList(new Task(2,"description 2","long description 2",PriorityLevel.LOW,true));
+//        taskList.addToList(new Task("description 1","long description 1",PriorityLevel.HIGH));
+//        taskList.addToList(new Task("description 2","long description 2",PriorityLevel.LOW));
         Intent intent = getIntent();
 
         TasksAllListAdapter tasksAllListAdapter = new TasksAllListAdapter(this, taskList.getList());
