@@ -17,17 +17,18 @@ import example.codeclan.com.todolist.TaskList;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 6;
     private static final String DATABASE_NAME = "ToDo_Database";
 
     private static final String TABLE_TASKLIST = "taskList";
 
     private static final String KEY_ID = "id";
+    private static final String KEY_TIMESTAMP = "timeStamp";
     private static final String KEY_SHORTDESCRIPTION = "shortDescription";
     private static final String KEY_LONGDESCRIPTION = "longDescription";
     private static final String KEY_PRIORITYLEVEL = "priority";
     private static final String KEY_COMPLETED = "completed";
-    private static final String KEY_TIMESTAMP = "timeStamp";
+    private static final String KEY_EXIPRYDATE = "expiryDate";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,9 +37,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         String CREATE_TASKLIST_TABLE = "CREATE TABLE " + TABLE_TASKLIST + "(" + KEY_ID
-                + " INTEGER PRIMARY KEY," + KEY_SHORTDESCRIPTION + " TEXT," +
-                KEY_LONGDESCRIPTION + " TEXT," + KEY_PRIORITYLEVEL + " TEXT," +
-                KEY_COMPLETED + " BOOLEAN," + KEY_TIMESTAMP + "TIMESTAMP DEFAULT CURRENT_TIMESTAMP" + ")";
+                + " INTEGER PRIMARY KEY," + KEY_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
+                + KEY_SHORTDESCRIPTION + " TEXT," + KEY_LONGDESCRIPTION + " TEXT,"
+                + KEY_PRIORITYLEVEL + " TEXT," + KEY_COMPLETED + " BOOLEAN,"
+                + KEY_EXIPRYDATE + " TIMESTAMP" + ")";
         db.execSQL(CREATE_TASKLIST_TABLE);
     }
 //UPGRADE DATABASE
@@ -57,6 +59,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_LONGDESCRIPTION, task.getLongDescription());
         values.put(KEY_PRIORITYLEVEL, task.getPriority().toString());
         values.put(KEY_COMPLETED, task.getCompleted());
+        values.put(KEY_EXIPRYDATE, task.getExpiryDate() );
 
         db.insert(TABLE_TASKLIST, null, values);
         db.close();
@@ -65,17 +68,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Task getTask(int id){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_TASKLIST, new String[] {KEY_ID, KEY_SHORTDESCRIPTION,
-        KEY_LONGDESCRIPTION, KEY_PRIORITYLEVEL, KEY_COMPLETED, KEY_TIMESTAMP}, KEY_ID + "=?",
+        Cursor cursor = db.query(TABLE_TASKLIST, new String[] {KEY_ID, KEY_TIMESTAMP, KEY_SHORTDESCRIPTION,
+        KEY_LONGDESCRIPTION, KEY_PRIORITYLEVEL, KEY_COMPLETED, KEY_EXIPRYDATE}, KEY_ID + "=?",
                 new String[] {String.valueOf(id) }, null, null, null, null);
 
         if(cursor != null)
             cursor.moveToFirst();
 
 
-        Task task = new Task(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2), Enum.valueOf(PriorityLevel.class,
-                cursor.getString(3)), cursor.getInt(4)!=0, cursor.getLong(5) );
+        Task task = new Task(Integer.parseInt(cursor.getString(0)), cursor.getLong(1),
+                cursor.getString(2), cursor.getString(3), Enum.valueOf(PriorityLevel.class,
+                cursor.getString(4)), cursor.getInt(5)!=0, cursor.getLong(6) );
         return task;
     }
 // GET/READ ALL TASKS
@@ -87,14 +90,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         TaskList list = new TaskList();
 
         while(cursor.moveToNext()){
-            list.addToList(new Task(Integer.parseInt(cursor.getString(0)),
-                    cursor.getString(1), cursor.getString(2), Enum.valueOf(PriorityLevel.class,
-                    cursor.getString(3)), cursor.getInt(4)!=0, cursor.getLong(5) ));
+            list.addToList(new Task(Integer.parseInt(cursor.getString(0)), cursor.getLong(1),
+                    cursor.getString(2), cursor.getString(3), Enum.valueOf(PriorityLevel.class,
+                    cursor.getString(4)), cursor.getInt(5)!=0, cursor.getLong(6)) );
         }
 
         cursor.close();
         return list;
     }
+
 
 //COUNT TASKS
     public int getTaskCount(){
@@ -114,6 +118,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_LONGDESCRIPTION, task.getLongDescription());
         values.put(KEY_PRIORITYLEVEL, task.getPriority().toString());
         values.put(KEY_COMPLETED, task.getCompleted());
+        values.put(KEY_EXIPRYDATE, String.valueOf(task.getExpiryDate()) );
 
         return db.update(TABLE_TASKLIST, values, KEY_ID + " = ?",
                 new String[] {String.valueOf(task.getId())});

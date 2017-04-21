@@ -11,24 +11,28 @@ import java.util.ArrayList;
 public class Task {
 
     private long id;
+    private long timeStamp;
+
     private String shortDescription;
     private String longDescription;
     private PriorityLevel priority;
     private boolean completed;
-    private long timeStamp;
+    private long expiryDate;
 
-    public Task(long id, String shortDescription, String longDescription, PriorityLevel priority, boolean completed, long timeStamp) {
+    public Task(long id, long timeStamp, String shortDescription, String longDescription, PriorityLevel priority,
+                boolean completed, long expiryDate) {
+        this.timeStamp = System.currentTimeMillis();
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
         this.priority = priority;
         this.id = id;
         this.completed = completed;
-        this.timeStamp = System.currentTimeMillis();
+        this.expiryDate = expiryDate;
 
     }
 
-    public Task(String shortDescription, String longDescription, PriorityLevel priority){
-        this(0, shortDescription, longDescription, priority, false, System.currentTimeMillis());
+    public Task(String shortDescription, String longDescription, PriorityLevel priority, long expiryDate){
+        this(0, System.currentTimeMillis(), shortDescription, longDescription, priority, false, expiryDate);
     }
 
     public long getId(){
@@ -55,6 +59,10 @@ public class Task {
         return this.timeStamp;
     }
 
+    public long getExpiryDate(){
+        return this.expiryDate;
+    }
+
     public void setId(long id){
         this.id = id;
     }
@@ -77,6 +85,10 @@ public class Task {
 
     public void setTimeStamp(long timeStamp){
         this.timeStamp = System.currentTimeMillis();
+    }
+
+    public void setExpiryDate(long expiryDate){
+        this.expiryDate = expiryDate;
     }
 
 }
