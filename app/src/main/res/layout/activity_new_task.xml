@@ -49,18 +49,31 @@
                 android:entries="@array/priority_array"
                 android:prompt="@string/priority_prompt" />
 
-            <Button
-                android:id="@+id/button_choose_task_date"
-                android:onClick="onNewTaskDateClick"
-                android:text="Click"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <DatePicker
-                android:id="@+id/new_task_date_picker"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></DatePicker>
+                <TextView
+                    android:id="@+id/text_date_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/text_date_picker_hidden"
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/button_choose_task_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onNewTaskDateClick"
+                    android:text="Change Exipry Date" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"

@@ -10,22 +10,22 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import example.codeclan.com.todolist.database.DatabaseHandler;
 
-public class NewTaskActivity extends AppCompatActivity {
+public class NewTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private EditText short_description;
     private EditText long_description;
     private Spinner priority_spinner;
-
-    private EditText text_date_picker;
-    private DatePicker new_task_date_picker;
-
-
+    private TextView text_date_picker;
+    private TextView text_date_picker_hidden;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +36,20 @@ public class NewTaskActivity extends AppCompatActivity {
         short_description = (EditText) findViewById(R.id.new_short_description);
         long_description = (EditText) findViewById(R.id.new_long_description);
         priority_spinner = (Spinner) findViewById(R.id.new_priority);
+        text_date_picker = (TextView) findViewById(R.id.text_date_picker);
+        text_date_picker_hidden = (TextView) findViewById(R.id.text_date_picker_hidden);
 
-        new_task_date_picker = (DatePicker) findViewById(R.id.new_task_date_picker);
+        long datemilliseconds = System.currentTimeMillis()+ (86400 * 7 * 1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date resultdate = new Date(datemilliseconds);
+        String formattedDate = sdf.format(resultdate);
+    // set default date to one week after todays date
+        text_date_picker.setText(formattedDate);
+        text_date_picker_hidden.setText(String.valueOf(datemilliseconds));
+
 
         UIHelper.hideKeyBoardWhenNotFocused(this, short_description);
         UIHelper.hideKeyBoardWhenNotFocused(this, long_description);
-
-
     }
 
     public void onSaveNewTaskClick(View view){
@@ -65,6 +72,18 @@ public class NewTaskActivity extends AppCompatActivity {
         DialogFragment picker = new DatePickerFragment();
         picker.show(getFragmentManager(), "datePicker");
     }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int day) {
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, day);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = sdf.format(c.getTime());
+
+        text_date_picker.setText(formattedDate);
+        text_date_picker_hidden.setText(String.valueOf(c.getTimeInMillis()));
+    }
+
 
 
 
