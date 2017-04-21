@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ToDoList</string>
+    <string name="priority_prompt">Priority?</string>
+
+    <string-array name="priority_array">
+        <item>HIGH</item>
+        <item>MEDIUM</item>
+        <item>LOW</item>
+    </string-array>
+
 </resources>

@@ -22,4 +22,12 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onNewTasksClick(View View){
+        Log.d(getClass().toString(), "onNewTasksClick clicked");
+
+        Intent intent = new Intent(this,NewTaskActivity.class);
+        startActivity(intent);
+    }
+
+
 }

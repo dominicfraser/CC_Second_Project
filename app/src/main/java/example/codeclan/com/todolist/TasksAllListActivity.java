@@ -9,6 +9,7 @@ import android.widget.ListView;
 import example.codeclan.com.todolist.R;
 import example.codeclan.com.todolist.TaskList;
 import example.codeclan.com.todolist.TasksAllListAdapter;
+import example.codeclan.com.todolist.database.DatabaseHandler;
 
 public class TasksAllListActivity extends AppCompatActivity {
 
@@ -20,7 +21,14 @@ public class TasksAllListActivity extends AppCompatActivity {
         setContentView(R.layout.tasks_all_list);
         Log.d(getClass().toString(), "onCreate for TasksAllListActivity");
 
-        taskList = new TaskList();
+        DatabaseHandler db = new DatabaseHandler(this);
+
+        Log.d(getClass().toString(), "DB handler made");
+        TaskList taskList = db.getTaskList();
+        Log.d(getClass().toString(), "tasklist made");
+
+
+//        taskList = new TaskList();
         taskList.addToList(new Task(1,"description 1","long description 1",PriorityLevel.HIGH,false));
         taskList.addToList(new Task(2,"description 2","long description 2",PriorityLevel.LOW,true));
         Intent intent = getIntent();

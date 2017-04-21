@@ -9,6 +9,7 @@ import android.renderscript.RenderScript;
 
 import example.codeclan.com.todolist.PriorityLevel;
 import example.codeclan.com.todolist.Task;
+import example.codeclan.com.todolist.TaskList;
 
 /**
  * Created by user on 20/04/2017.
@@ -76,6 +77,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(3)), cursor.getInt(4)!=0 );
         return task;
     }
+// GET/READ ALL TASKS
+    public TaskList getTaskList(){
+        String query = "SELECT * FROM " + TABLE_TASKLIST;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        TaskList list = new TaskList();
+
+        while(cursor.moveToNext()){
+            list.addToList(new Task(Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1), cursor.getString(2), Enum.valueOf(PriorityLevel.class,
+                    cursor.getString(3)), cursor.getInt(4)!=0 ));
+        }
+
+        cursor.close();
+        return list;
+    }
+
 //COUNT TASKS
     public int getTaskCount(){
         String countQuery = "SELECT * FROM " + TABLE_TASKLIST;

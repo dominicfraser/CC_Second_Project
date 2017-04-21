@@ -9,6 +9,7 @@
     <Button
         android:id="@+id/button_write_new_task"
         android:text="Add New Task"
+        android:onClick="onNewTasksClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
