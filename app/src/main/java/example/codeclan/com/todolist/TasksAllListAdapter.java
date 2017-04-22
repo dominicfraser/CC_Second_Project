@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.view.animation.ScaleAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -35,11 +37,13 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.task_in_list, parent, false);
         }
-
+//        set up tasks and db
         final DatabaseHandler db = new DatabaseHandler(parent.getContext());
-
         Task task = getItem(position);
         final Task task_in_db = db.getTask(position+1);
+
+//        find and set up views
+        final ImageView arrow_for_main_list = (ImageView) listItemView.findViewById(R.id.arrow_for_main_list);
 
         final TextView task_in_list_short_description = (TextView) listItemView.findViewById(R.id.task_in_list_short_description);
         task_in_list_short_description.setText(task.getShortDescription().toString());
@@ -52,10 +56,12 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
         final TextView task_in_list_long_description = (TextView) listItemView.findViewById(R.id.task_in_list_long_description);
         task_in_list_long_description.setText(task.getLongDescription().toString());
 
+        LinearLayout side_bar_main_list = (LinearLayout) listItemView.findViewById(R.id.side_bar_main_list);
 
         Switch switch_task_completed = (Switch) listItemView.findViewById(R.id.switch_task_completed);
         setSwitchToReflectDB(switch_task_completed, task);
 
+//        actions using views
         switch_task_completed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -75,11 +81,29 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
             public void onClick(View v) {
                 int vis = task_in_list_long_description.getVisibility();
                 if (vis == View.GONE){
-                    ScaleAnimation anim = new ScaleAnimation(1, 1, 0, 1);
                     task_in_list_long_description.setVisibility(View.VISIBLE);
+                    arrow_for_main_list.setImageResource(R.drawable.collapse_arrow);
                 }
                 else if(vis == View.VISIBLE) {
                     task_in_list_long_description.setVisibility(View.GONE);
+                    arrow_for_main_list.setImageResource(R.drawable.expand_arrow);
+
+                }
+            }
+        });
+
+        side_bar_main_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int vis = task_in_list_long_description.getVisibility();
+                if (vis == View.GONE){
+                    task_in_list_long_description.setVisibility(View.VISIBLE);
+                    arrow_for_main_list.setImageResource(R.drawable.collapse_arrow);
+                }
+                else if(vis == View.VISIBLE) {
+                    task_in_list_long_description.setVisibility(View.GONE);
+                    arrow_for_main_list.setImageResource(R.drawable.expand_arrow);
+
                 }
             }
         });
