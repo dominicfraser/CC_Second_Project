@@ -1,17 +1,18 @@
 package example.codeclan.com.todolist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.ScaleAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,6 +45,7 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
 
 //        find and set up views
         final ImageView arrow_for_main_list = (ImageView) listItemView.findViewById(R.id.arrow_for_main_list);
+        final ImageView edit_in_all_list = (ImageView) listItemView.findViewById(R.id.edit_in_all_list);
 
         final TextView task_in_list_short_description = (TextView) listItemView.findViewById(R.id.task_in_list_short_description);
         task_in_list_short_description.setText(task.getShortDescription().toString());
@@ -51,7 +53,7 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
 
         TextView task_in_list_timestamp = (TextView) listItemView.findViewById(R.id.task_in_list_timestamp);
         Date timeStamp = new Date(task.getTimeStamp());
-        task_in_list_timestamp.setText(String.valueOf(task.getCompleted()));
+        task_in_list_timestamp.setText("Expires: " + String.valueOf(task.getCompleted()));
 
         final TextView task_in_list_long_description = (TextView) listItemView.findViewById(R.id.task_in_list_long_description);
         task_in_list_long_description.setText(task.getLongDescription().toString());
@@ -105,6 +107,15 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
                     arrow_for_main_list.setImageResource(R.drawable.expand_arrow);
 
                 }
+            }
+        });
+
+        edit_in_all_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent editIntent = new Intent(parent.getContext(),EditTaskActivity.class);
+                editIntent.putExtra("taskId", String.valueOf(task_in_db.getId()));
+                parent.getContext().startActivity(editIntent);
             }
         });
 

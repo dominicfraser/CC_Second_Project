@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">ToDoList</string>
     <string name="priority_prompt">Priority?</string>
+    <string name="task_calendar">Expiry Date:</string>
+    <string name="short_description">Reminder:</string>
+    <string name="long_description">Full Details:</string>
 
     <string-array name="priority_array">
         <item>HIGH</item>

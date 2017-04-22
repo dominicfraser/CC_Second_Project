@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingBottom="10dp">
 
 
     <LinearLayout
@@ -20,6 +21,7 @@
             android:id="@+id/arrow_for_main_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingRight="10sp"
             android:scaleType="center"
             android:src="@drawable/expand_arrow" />
     </LinearLayout>
@@ -56,32 +58,61 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="0dp"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_weight="0.3"
-        android:animateLayoutChanges="true"
-        android:minWidth="120dp"
-        android:orientation="vertical"
-        android:gravity="right">
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"        >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Complete"
-            android:textAlignment="center" />
-
-        <Switch
-            android:id="@+id/switch_task_completed"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textOff="N"
-            android:textOn="Y" />
-    </LinearLayout>
+            android:layout_marginRight="20dp"
+            android:layout_weight="0.3"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Complete"
+                android:textAlignment="center" />
+
+            <Switch
+                android:id="@+id/switch_task_completed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textOff="N"
+                android:textOn="Y" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/delete_in_all_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/ic_delete" />
+
+                <ImageView
+                    android:id="@+id/edit_in_all_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/ic_edit" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
