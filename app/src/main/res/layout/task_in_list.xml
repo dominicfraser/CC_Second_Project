@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    >
 
 
     <LinearLayout
@@ -36,10 +37,18 @@
             android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            />
 
         <TextView
             android:id="@+id/task_in_list_timestamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/task_in_list_long_description"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"/>
