@@ -47,6 +47,7 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
 //        find and set up views
         final ImageView arrow_for_main_list = (ImageView) listItemView.findViewById(R.id.arrow_for_main_list);
         final ImageView edit_in_all_list = (ImageView) listItemView.findViewById(R.id.edit_in_all_list);
+        final ImageView delete_in_all_list = (ImageView) listItemView.findViewById(R.id.delete_in_all_list);
 
         final TextView task_in_list_short_description = (TextView) listItemView.findViewById(R.id.task_in_list_short_description);
         task_in_list_short_description.setText(task.getShortDescription().toString());
@@ -120,6 +121,13 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
                 Intent editIntent = new Intent(parent.getContext(),EditTaskActivity.class);
                 editIntent.putExtra("taskId", String.valueOf(task_in_db.getId()));
                 parent.getContext().startActivity(editIntent);
+            }
+        });
+
+        delete_in_all_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.deleteTask(task_in_db);
             }
         });
 
