@@ -91,4 +91,11 @@ public class Task {
         this.expiryDate = expiryDate;
     }
 
+    public void updateTask(String shortDescription, String longDescription, PriorityLevel priority, long expiryDate){
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
+        this.priority = priority;
+        this.expiryDate = expiryDate;
+    }
+
 }

@@ -57,7 +57,7 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String formattedDate = sdf.format(new Date(task.getExpiryDate()));
         task_in_list_expiry.setText("Expires: " + formattedDate);
-        
+
 
         final TextView task_in_list_long_description = (TextView) listItemView.findViewById(R.id.task_in_list_long_description);
         task_in_list_long_description.setText(task.getLongDescription().toString());
