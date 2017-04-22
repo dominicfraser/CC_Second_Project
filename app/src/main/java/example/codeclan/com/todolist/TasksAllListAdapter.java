@@ -14,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.content.Intent;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -51,9 +52,12 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
         task_in_list_short_description.setText(task.getShortDescription().toString());
 
 
-        TextView task_in_list_timestamp = (TextView) listItemView.findViewById(R.id.task_in_list_timestamp);
+        TextView task_in_list_expiry = (TextView) listItemView.findViewById(R.id.task_in_list_timestamp);
         Date timeStamp = new Date(task.getTimeStamp());
-        task_in_list_timestamp.setText("Expires: " + String.valueOf(task.getCompleted()));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = sdf.format(new Date(task.getExpiryDate()));
+        task_in_list_expiry.setText("Expires: " + formattedDate);
+        
 
         final TextView task_in_list_long_description = (TextView) listItemView.findViewById(R.id.task_in_list_long_description);
         task_in_list_long_description.setText(task.getLongDescription().toString());
