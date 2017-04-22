@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import example.codeclan.com.todolist.R;
 import example.codeclan.com.todolist.TaskList;
