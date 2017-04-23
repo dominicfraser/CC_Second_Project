@@ -2,6 +2,7 @@ package example.codeclan.com.todolist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,10 +40,20 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.task_in_list, parent, false);
         }
+        Log.d(getClass().toString(), "getView for TasksAllListAdapter");
 //        set up tasks and db
         final DatabaseHandler db = new DatabaseHandler(parent.getContext());
-        Task task = getItem(position);
-        final Task task_in_db = db.getTask(position+1);
+        final Task task = getItem(position);
+
+        Log.d(getClass().toString(), "got task from position " + position);
+        Log.d(getClass().toString(), "highest id in db " + db.getHighestID());
+
+        int task_id = (int) task.getId();
+        final Task task_in_db = db.getTask(task_id);
+
+        Log.d(getClass().toString(), "id = " + (task_in_db.getId()));
+
+        Log.d(getClass().toString(), "got task from db");
 
 //        find and set up views
         final ImageView arrow_for_main_list = (ImageView) listItemView.findViewById(R.id.arrow_for_main_list);
@@ -82,7 +93,7 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
                 }
             }
         });
-
+//  click on short description
         task_in_list_short_description.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +109,7 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
                 }
             }
         });
-
+//  click on expand/collapse icon
         side_bar_main_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +125,7 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
                 }
             }
         });
-
+//  click on edit icon
         edit_in_all_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,11 +134,23 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
                 parent.getContext().startActivity(editIntent);
             }
         });
+//  click on delete icon
+        final View.OnClickListener myCLDeleteSnackbar = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.addTask(task_in_db);
+                Log.d(getClass().toString(), String.valueOf(task_in_db.getId()));
+                Log.d(getClass().toString(), String.valueOf(task.getId()));
+            }
+        };
 
         delete_in_all_list.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View vi) {
                 db.deleteTask(task_in_db);
+                Snackbar.make(vi, "Task deleted", Snackbar.LENGTH_LONG)
+                        .setAction("UNDO", myCLDeleteSnackbar)
+                        .show();
             }
         });
 

@@ -130,5 +130,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 { String.valueOf(task.getId())});
         db.close();
     }
+//GET LAST TASK
+    public int getHighestID() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT MAX(id) FROM taskList", null);
+        cursor.moveToFirst();
+//        cursor.close();
+
+        return Integer.parseInt(cursor.getString(0));
+    }
+
 
 }

@@ -4,6 +4,7 @@
     <string name="task_calendar">Expiry Date:</string>
     <string name="short_description">Reminder:</string>
     <string name="long_description">Full Details:</string>
+    <string name="snackbar_text_undo">Undo</string>
 
     <string-array name="priority_array">
         <item>HIGH</item>
