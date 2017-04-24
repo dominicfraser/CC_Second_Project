@@ -6,6 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.renderscript.RenderScript;
+import android.util.Log;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import example.codeclan.com.todolist.PriorityLevel;
 import example.codeclan.com.todolist.Task;
@@ -75,8 +81,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if(cursor != null)
             cursor.moveToFirst();
 
-
-        Task task = new Task(Integer.parseInt(cursor.getString(0)), cursor.getLong(1),
+        Task task = new Task(Integer.parseInt(cursor.getString(0)), convertCurrentTimestampStringToLong(cursor.getString(1)),
                 cursor.getString(2), cursor.getString(3), Enum.valueOf(PriorityLevel.class,
                 cursor.getString(4)), cursor.getInt(5)!=0, cursor.getLong(6) );
         cursor.close();
@@ -91,13 +96,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         TaskList list = new TaskList();
 
         while(cursor.moveToNext()){
-            list.addToList(new Task(Integer.parseInt(cursor.getString(0)), cursor.getLong(1),
+            list.addToList(new Task(Integer.parseInt(cursor.getString(0)), convertCurrentTimestampStringToLong(cursor.getString(1)),
                     cursor.getString(2), cursor.getString(3), Enum.valueOf(PriorityLevel.class,
                     cursor.getString(4)), cursor.getInt(5)!=0, cursor.getLong(6)) );
         }
 
         cursor.close();
         return list;
+    }
+
+    public long convertCurrentTimestampStringToLong(String cursorString){
+        DateFormat sdf = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss");
+        String dateInSQL = cursorString;
+        Date timeStamp = null;
+        try {
+            timeStamp = sdf.parse(dateInSQL);
+        } catch (ParseException e) {
+//   should put this so app doesn't break if the try fails     timeStamp = new Date();
+            e.printStackTrace();
+        }
+        long timeStamplong = timeStamp.getTime();
+        return timeStamplong;
     }
 
 

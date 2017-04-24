@@ -7,16 +7,18 @@ import android.util.Log;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import example.codeclan.com.todolist.database.DatabaseHandler;
+import example.codeclan.com.todolist.helpers.ExpiryDateComparator;
 
-public class TasksSortedCompletedActivity extends AppCompatActivity {
+public class TasksSortedExpiryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tasks_sorted_completed);
-        Log.d(getClass().toString(), "onCreate for TasksSortedCompletedActivity");
+        setContentView(R.layout.activity_tasks_sorted_expiry);
+        Log.d(getClass().toString(), "onCreate for TasksSortedExpiryActivity");
 
         DatabaseHandler db = new DatabaseHandler(this);
 
@@ -24,12 +26,12 @@ public class TasksSortedCompletedActivity extends AppCompatActivity {
         TaskList taskList = db.getTaskList();
         Log.d(getClass().toString(), "tasklist made");
 
-        ArrayList<Task> taskListSortedCompleted = taskList.sortCompleted();
-// refactor all this to use as a second sorted list, above and below
+        ArrayList<Task> taskListasArrayList = taskList.getList();
+        Collections.sort(taskListasArrayList, new ExpiryDateComparator());
 
         Intent intent = getIntent();
 
-        TasksAllListAdapter tasksAllListAdapter = new TasksAllListAdapter(this, taskList.getList());
+        TasksAllListAdapter tasksAllListAdapter = new TasksAllListAdapter(this, taskListasArrayList);
 
         ListView listView = (ListView) findViewById(R.id.tasks_sorted_completed_list);
 

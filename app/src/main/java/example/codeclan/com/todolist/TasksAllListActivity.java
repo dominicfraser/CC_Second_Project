@@ -16,6 +16,7 @@ import example.codeclan.com.todolist.TaskList;
 import example.codeclan.com.todolist.TasksAllListAdapter;
 import example.codeclan.com.todolist.database.DatabaseHandler;
 import example.codeclan.com.todolist.helpers.CompletedComparator;
+import example.codeclan.com.todolist.helpers.TimeStampComparator;
 
 public class TasksAllListActivity extends AppCompatActivity {
 
@@ -32,9 +33,10 @@ public class TasksAllListActivity extends AppCompatActivity {
         Log.d(getClass().toString(), "DB handler made");
         TaskList taskList = db.getTaskList();
         Log.d(getClass().toString(), "tasklist made");
-
+//sort list
         ArrayList<Task> taskListasArrayList = taskList.getList();
-        Collections.sort(taskListasArrayList, new CompletedComparator());
+        Collections.sort(taskListasArrayList, new TimeStampComparator());
+//        Collections.sort(taskListasArrayList, new CompletedComparator());
 
 
         Intent intent = getIntent();

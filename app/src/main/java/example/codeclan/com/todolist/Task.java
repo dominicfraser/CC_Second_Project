@@ -1,6 +1,7 @@
 package example.codeclan.com.todolist;
 
 import android.renderscript.RenderScript;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -21,18 +22,18 @@ public class Task {
 
     public Task(long id, long timeStamp, String shortDescription, String longDescription, PriorityLevel priority,
                 boolean completed, long expiryDate) {
-        this.timeStamp = System.currentTimeMillis();
+        this.id = id;
+        Log.d("AHHH", "Time: " + timeStamp);
+        this.timeStamp = timeStamp;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
         this.priority = priority;
-        this.id = id;
         this.completed = completed;
         this.expiryDate = expiryDate;
-
     }
 
     public Task(String shortDescription, String longDescription, PriorityLevel priority, long expiryDate){
-        this(0, System.currentTimeMillis(), shortDescription, longDescription, priority, false, expiryDate);
+        this(0, 0, shortDescription, longDescription, priority, false, expiryDate);
     }
 
     public long getId(){

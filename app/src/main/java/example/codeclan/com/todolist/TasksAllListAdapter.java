@@ -47,6 +47,7 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
 
         Log.d(getClass().toString(), "got task from position " + position);
         Log.d(getClass().toString(), "highest id in db " + db.getHighestID());
+        Log.d(getClass().toString(), "timestap =  " + task.getTimeStamp());
 
         int task_id = (int) task.getId();
         final Task task_in_db = db.getTask(task_id);
