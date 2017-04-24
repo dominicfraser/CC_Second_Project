@@ -55,6 +55,10 @@ public class TasksSortedExpiryActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.all_list_new_task:
+                Intent i1 = new Intent(this,NewTaskActivity.class);
+                this.startActivity(i1);
+                return true;
             case R.id.all_list_menu_sort_all:
                 Intent i = new Intent(this,TasksAllListActivity.class);
                 this.startActivity(i);

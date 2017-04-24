@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
 
@@ -63,6 +64,10 @@ public class TasksAllListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.all_list_new_task:
+                Intent i1 = new Intent(this,NewTaskActivity.class);
+                this.startActivity(i1);
+                return true;
             case R.id.all_list_menu_sort_expiry:
                 Intent i2 = new Intent(this,TasksSortedExpiryActivity.class);
                 this.startActivity(i2);
