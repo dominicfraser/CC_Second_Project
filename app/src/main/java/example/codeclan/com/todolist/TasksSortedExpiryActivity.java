@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import example.codeclan.com.todolist.database.DatabaseHandler;
+import example.codeclan.com.todolist.helpers.CompletedComparator;
 import example.codeclan.com.todolist.helpers.ExpiryDateComparator;
 
 public class TasksSortedExpiryActivity extends AppCompatActivity {
@@ -28,6 +29,7 @@ public class TasksSortedExpiryActivity extends AppCompatActivity {
 
         ArrayList<Task> taskListasArrayList = taskList.getList();
         Collections.sort(taskListasArrayList, new ExpiryDateComparator());
+        Collections.sort(taskListasArrayList, new CompletedComparator());
 
         Intent intent = getIntent();
 
