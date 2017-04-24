@@ -79,6 +79,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Task task = new Task(Integer.parseInt(cursor.getString(0)), cursor.getLong(1),
                 cursor.getString(2), cursor.getString(3), Enum.valueOf(PriorityLevel.class,
                 cursor.getString(4)), cursor.getInt(5)!=0, cursor.getLong(6) );
+        cursor.close();
         return task;
     }
 // GET/READ ALL TASKS
@@ -135,9 +136,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT MAX(id) FROM taskList", null);
         cursor.moveToFirst();
-//        cursor.close();
 
-        return Integer.parseInt(cursor.getString(0));
+        String id = cursor.getString(0);
+        cursor.close();
+
+        return Integer.parseInt(id);
     }
 
 

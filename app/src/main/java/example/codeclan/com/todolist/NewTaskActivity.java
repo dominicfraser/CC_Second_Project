@@ -77,7 +77,7 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerDial
     }
 
     public void onNewTaskDateClick(View view){
-        DialogFragment picker = new DatePickerFragment();
+        DialogFragment picker = new DatePickerFragmentNewTask();
         picker.show(getFragmentManager(), "datePicker");
     }
 

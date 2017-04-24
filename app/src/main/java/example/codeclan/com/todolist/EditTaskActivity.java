@@ -90,7 +90,19 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
 
 
     public void onEditTaskDateClick(View view){
-        DialogFragment picker = new DatePickerFragment();
+        Date date = new Date(task.getExpiryDate());
+        Bundle editTaskBundle = new Bundle();
+        editTaskBundle.putLong("dateOfTask",date.getTime());
+
+//        SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
+//        int yearFromTask = Integer.parseInt(sdfYear.format(date));
+//        SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
+//        int monthFromTask = Integer.parseInt(sdfMonth.format(date));
+//        SimpleDateFormat sdfDay  = new SimpleDateFormat("dd");
+//        int dayFromTask = Integer.parseInt(sdfDay.format(date));
+
+        DialogFragment picker = new DatePickerFragmentEditTask();
+        picker.setArguments(editTaskBundle);
         picker.show(getFragmentManager(), "datePicker");
     }
 
@@ -98,6 +110,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
     public void onDateSet(DatePicker view, int year, int month, int day) {
         Calendar c = Calendar.getInstance();
         c.set(year, month, day);
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String formattedDate = sdf.format(c.getTime());
 
@@ -106,7 +119,6 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         Log.d(getClass().toString(), "set new date");
 
     }
-
 
     public Task checkForUpdates() {
         String possible_new_short_des = edit_short_description.getText().toString();

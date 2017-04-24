@@ -6,16 +6,24 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
- * Created by user on 21/04/2017.
+ * Created by user on 24/04/2017.
  */
 
-public class DatePickerFragment extends DialogFragment {
+public class DatePickerFragmentEditTask extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-// Set current date to default date in date picker
+//  Read the passed bundle from the activity
+        Bundle editTaskBundle = this.getArguments();
+        Long dateOfTask = editTaskBundle.getLong("dateOfTask");
+
+// Set current date to default date in dateOfTask
         final Calendar c = Calendar.getInstance();
+
+        c.setTime(new Date((dateOfTask)));
+
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
@@ -25,4 +33,3 @@ public class DatePickerFragment extends DialogFragment {
                 year, month, day);
     }
 }
-
