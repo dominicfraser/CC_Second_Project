@@ -30,6 +30,7 @@ public class TasksAllListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasks_all_list);
+        setTitle("ToDo List > All");
         Log.d(getClass().toString(), "onCreate for TasksAllListActivity");
 
         DatabaseHandler db = new DatabaseHandler(this);

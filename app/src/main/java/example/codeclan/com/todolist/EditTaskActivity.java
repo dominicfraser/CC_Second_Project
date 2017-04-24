@@ -36,6 +36,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
+        setTitle("ToDo List > Edit");
         Log.d(getClass().toString(), "onCreate for activity_edit_task");
 
         Intent intent = getIntent();

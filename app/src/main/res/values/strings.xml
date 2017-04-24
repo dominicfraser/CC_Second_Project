@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToDoList</string>
+    <string name="app_name">ToDo List</string>
     <string name="priority_prompt">Priority?</string>
     <string name="task_calendar">Expiry Date:</string>
     <string name="short_description">Reminder:</string>

@@ -32,6 +32,8 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerDial
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
+        setTitle("ToDo List > New");
+
         Log.d(getClass().toString(), "onCreate for NewTaskActivity");
 
         short_description = (EditText) findViewById(R.id.new_short_description);

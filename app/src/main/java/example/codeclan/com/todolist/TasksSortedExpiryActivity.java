@@ -22,6 +22,7 @@ public class TasksSortedExpiryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks_sorted_expiry);
+        setTitle("ToDo List > Expiry");
         Log.d(getClass().toString(), "onCreate for TasksSortedExpiryActivity");
 
         DatabaseHandler db = new DatabaseHandler(this);
