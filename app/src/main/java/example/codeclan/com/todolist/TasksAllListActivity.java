@@ -36,7 +36,7 @@ public class TasksAllListActivity extends AppCompatActivity {
 //sort list
         ArrayList<Task> taskListasArrayList = taskList.getList();
         Collections.sort(taskListasArrayList, new TimeStampComparator());
-//        Collections.sort(taskListasArrayList, new CompletedComparator());
+        Collections.sort(taskListasArrayList, new CompletedComparator());
 
 
         Intent intent = getIntent();
