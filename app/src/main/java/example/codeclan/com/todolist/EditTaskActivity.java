@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import example.codeclan.com.todolist.database.DatabaseHandler;
+import example.codeclan.com.todolist.helpers.UIHelper;
 
 
 public class EditTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -93,13 +94,6 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         Date date = new Date(task.getExpiryDate());
         Bundle editTaskBundle = new Bundle();
         editTaskBundle.putLong("dateOfTask",date.getTime());
-
-//        SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
-//        int yearFromTask = Integer.parseInt(sdfYear.format(date));
-//        SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
-//        int monthFromTask = Integer.parseInt(sdfMonth.format(date));
-//        SimpleDateFormat sdfDay  = new SimpleDateFormat("dd");
-//        int dayFromTask = Integer.parseInt(sdfDay.format(date));
 
         DialogFragment picker = new DatePickerFragmentEditTask();
         picker.setArguments(editTaskBundle);

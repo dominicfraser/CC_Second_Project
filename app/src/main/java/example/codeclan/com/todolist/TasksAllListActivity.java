@@ -8,10 +8,14 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Switch;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import example.codeclan.com.todolist.R;
 import example.codeclan.com.todolist.TaskList;
 import example.codeclan.com.todolist.TasksAllListAdapter;
 import example.codeclan.com.todolist.database.DatabaseHandler;
+import example.codeclan.com.todolist.helpers.CompletedComparator;
 
 public class TasksAllListActivity extends AppCompatActivity {
 
@@ -29,13 +33,13 @@ public class TasksAllListActivity extends AppCompatActivity {
         TaskList taskList = db.getTaskList();
         Log.d(getClass().toString(), "tasklist made");
 
+        ArrayList<Task> taskListasArrayList = taskList.getList();
+        Collections.sort(taskListasArrayList, new CompletedComparator());
 
-//        taskList = new TaskList();
-//        taskList.addToList(new Task("description 1","long description 1",PriorityLevel.HIGH));
-//        taskList.addToList(new Task("description 2","long description 2",PriorityLevel.LOW));
+
         Intent intent = getIntent();
 
-        TasksAllListAdapter tasksAllListAdapter = new TasksAllListAdapter(this, taskList.getList());
+        TasksAllListAdapter tasksAllListAdapter = new TasksAllListAdapter(this, taskListasArrayList);
 
         ListView listView = (ListView) findViewById(R.id.tasks_all_list);
 

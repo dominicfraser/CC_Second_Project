@@ -28,4 +28,10 @@ public class TaskList {
     public Task entry(int index) {
         return list.get(index);
     }
+
+    public ArrayList<Task> sortCompleted() {
+        ArrayList<Task> list = getList();
+        //TODO decide what the second sort option will be
+        return list;
+    }
 }

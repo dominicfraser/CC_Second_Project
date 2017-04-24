@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import example.codeclan.com.todolist.database.DatabaseHandler;
+import example.codeclan.com.todolist.helpers.UIHelper;
 
 public class NewTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
