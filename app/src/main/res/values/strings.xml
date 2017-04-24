@@ -5,6 +5,8 @@
     <string name="short_description">Reminder:</string>
     <string name="long_description">Full Details:</string>
     <string name="snackbar_text_undo">Undo</string>
+    <string name="expiry_sorted">Sort by Expiry</string>
+    <string name="all_sorted">Sort by Date Added</string>
 
     <string-array name="priority_array">
         <item>HIGH</item>

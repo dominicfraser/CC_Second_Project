@@ -56,6 +56,7 @@ public class TasksAllListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.all_list_menu, menu);
+        menu.findItem(R.id.all_list_menu_sort_all).setVisible(false);
         return true;
     }
 
@@ -63,8 +64,8 @@ public class TasksAllListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.all_list_menu_sort_expiry:
-                Intent i = new Intent(this,TasksSortedExpiryActivity.class);
-                this.startActivity(i);
+                Intent i2 = new Intent(this,TasksSortedExpiryActivity.class);
+                this.startActivity(i2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
