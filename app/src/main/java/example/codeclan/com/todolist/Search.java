@@ -2,9 +2,14 @@ package example.codeclan.com.todolist;
 
 import android.app.Activity;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -60,6 +65,43 @@ public class Search extends Activity {
 
         listView.setAdapter(tasksAllListAdapter);
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.all_list_menu, menu);
+
+        // Add SearchWidget.
+        SearchManager searchManager = (SearchManager) getSystemService( Context.SEARCH_SERVICE );
+        SearchView searchView = (SearchView) menu.findItem( R.id.menu_search ).getActionView();
+        searchView.setSearchableInfo( searchManager.getSearchableInfo( getComponentName() ) );
+
+        return super.onCreateOptionsMenu( menu );
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.all_list_new_task:
+                Intent i1 = new Intent(this,NewTaskActivity.class);
+                this.startActivity(i1);
+                return true;
+            case R.id.all_list_menu_sort_all:
+                Intent i2 = new Intent(this,TasksSortedExpiryActivity.class);
+                this.startActivity(i2);
+                return true;
+            case R.id.all_list_menu_sort_expiry:
+                Intent i3 = new Intent(this,TasksSortedExpiryActivity.class);
+                this.startActivity(i3);
+                return true;
+            case R.id.all_list_menu_sort_priority:
+                Intent i4 = new Intent(this,TasksSortedPriorityActivity.class);
+                this.startActivity(i4);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
