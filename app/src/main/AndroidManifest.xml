@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="android.app.default_searchable"
-            android:value=".app.Search" />
+            android:value=".Search" />
 
         <activity android:name=".MainMenuActivity">
             <intent-filter>
@@ -31,7 +31,7 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <activity android:name=".TasksAllListActivity" />
+        <activity android:name=".TasksAllListActivity"/>
         <activity android:name=".NewTaskActivity" />
         <activity android:name=".EditTaskActivity" />
         <activity android:name=".TasksSortedExpiryActivity" />

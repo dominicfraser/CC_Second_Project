@@ -104,7 +104,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         return list;
     }
-
+//Helper TIMESTAMP CONVERSION
     public long convertCurrentTimestampStringToLong(String cursorString){
         DateFormat sdf = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss");
         String dateInSQL = cursorString;
@@ -118,8 +118,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         long timeStamplong = timeStamp.getTime();
         return timeStamplong;
     }
-
-
 //COUNT TASKS
     public int getTaskCount(){
         String countQuery = "SELECT * FROM " + TABLE_TASKLIST;
@@ -160,6 +158,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
 
         return Integer.parseInt(id);
+    }
+
+// SEARCH
+    public TaskList search(String string){
+        String query = "SELECT * FROM " + TABLE_TASKLIST + " WHERE " + KEY_SHORTDESCRIPTION + " LIKE '%"
+                + string + "%'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        TaskList list = new TaskList();
+
+        while(cursor.moveToNext()){
+            list.addToList(new Task(Integer.parseInt(cursor.getString(0)), convertCurrentTimestampStringToLong(cursor.getString(1)),
+                    cursor.getString(2), cursor.getString(3), Enum.valueOf(PriorityLevel.class,
+                    cursor.getString(4)), cursor.getInt(5)!=0, cursor.getLong(6)) );
+        }
+
+        cursor.close();
+        return list;
+
+
     }
 
 
