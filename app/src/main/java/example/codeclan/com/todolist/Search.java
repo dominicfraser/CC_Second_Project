@@ -5,6 +5,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
@@ -23,7 +24,7 @@ import example.codeclan.com.todolist.helpers.TimeStampComparator;
  * Created by user on 25/04/2017.
  */
 
-public class Search extends Activity {
+public class Search extends AppCompatActivity {
 
     DatabaseHandler db;
 
@@ -42,8 +43,6 @@ public class Search extends Activity {
     }
 
     private void doMySearch(String query) {
-        Log.d(getClass().toString(), "AHHH query: " + query);
-
         db = new DatabaseHandler(this);
         Log.d(getClass().toString(), "DB handler made");
         Log.d(getClass().toString(), "Running search...");
@@ -52,16 +51,13 @@ public class Search extends Activity {
         Log.d(getClass().toString(), "tasklist made");
 
         ArrayList<Task> taskListAsArrayList = taskList.getList();
-
 // sort list
         Collections.sort(taskListAsArrayList, new TimeStampComparator());
         Collections.sort(taskListAsArrayList, new CompletedComparator());
 
-        Intent intent = getIntent();
-
         TasksAllListAdapter tasksAllListAdapter = new TasksAllListAdapter(this, taskListAsArrayList);
 
-        ListView listView = (ListView) findViewById(R.id.tasks_sorted_search);
+        ListView listView = (ListView) findViewById(R.id.activity_search_sort);
 
         listView.setAdapter(tasksAllListAdapter);
 

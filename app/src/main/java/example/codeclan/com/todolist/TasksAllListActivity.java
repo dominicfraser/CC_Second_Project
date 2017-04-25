@@ -27,8 +27,6 @@ import example.codeclan.com.todolist.helpers.TimeStampComparator;
 
 public class TasksAllListActivity extends AppCompatActivity {
 
-    private TaskList taskList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +43,6 @@ public class TasksAllListActivity extends AppCompatActivity {
         ArrayList<Task> taskListasArrayList = taskList.getList();
         Collections.sort(taskListasArrayList, new TimeStampComparator());
         Collections.sort(taskListasArrayList, new CompletedComparator());
-
-
-        Intent intent = getIntent();
 
         TasksAllListAdapter tasksAllListAdapter = new TasksAllListAdapter(this, taskListasArrayList);
 

@@ -38,8 +38,6 @@ public class TasksSortedExpiryActivity extends AppCompatActivity {
         Collections.sort(taskListasArrayList, new ExpiryDateComparator());
         Collections.sort(taskListasArrayList, new CompletedComparator());
 
-        Intent intent = getIntent();
-
         TasksAllListAdapter tasksAllListAdapter = new TasksAllListAdapter(this, taskListasArrayList);
 
         ListView listView = (ListView) findViewById(R.id.tasks_sorted_completed_list);

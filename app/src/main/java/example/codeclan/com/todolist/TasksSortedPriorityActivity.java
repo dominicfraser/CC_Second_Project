@@ -33,14 +33,11 @@ public class TasksSortedPriorityActivity extends AppCompatActivity {
         DatabaseHandler db = new DatabaseHandler(this);
         TaskList taskList = db.getTaskList();
 
-
         ArrayList<Task> taskListasArrayList = taskList.getList();
         Log.d(getClass().toString(), "got ArrayList<Task> size " + taskListasArrayList.size());
 
         Collections.sort(taskListasArrayList, new PriorityComparator());
         Collections.sort(taskListasArrayList, new CompletedComparator());
-
-        Intent intent = getIntent();
 
         TasksAllListAdapter tasksAllListAdapter = new TasksAllListAdapter(this, taskListasArrayList);
 

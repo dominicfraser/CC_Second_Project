@@ -32,7 +32,6 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
 
     public TasksAllListAdapter(Context context, ArrayList<Task> tasks){
         super(context, 0, tasks);
-
     }
 
     @Override
@@ -66,7 +65,6 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
 
 
         TextView task_in_list_expiry = (TextView) listItemView.findViewById(R.id.task_in_list_timestamp);
-        Date timeStamp = new Date(task.getTimeStamp());
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String formattedDate = sdf.format(new Date(task.getExpiryDate()));
         task_in_list_expiry.setText("Expires: " + formattedDate);
@@ -155,7 +153,6 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
             }
         });
 
-
         listItemView.setTag(task);
         return listItemView;
     }
@@ -168,7 +165,6 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
         else{
             swit.setChecked(false);
         }
-
     }
 
 
