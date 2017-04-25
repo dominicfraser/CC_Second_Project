@@ -1,23 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="example.codeclan.com.todolist.MainMenuActivity">
 
+    <ImageView
+        android:id="@+id/welcome_main_logo"
+        android:layout_width="124dp"
+        android:layout_height="104dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="36dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_checked_checkbox_2" />
+
+    <TextView
+        android:id="@+id/welcome_welcome_text"
+        android:layout_width="305dp"
+        android:layout_height="190dp"
+        android:layout_margin="40dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="@string/welcome_text"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_main_logo" />
+
     <Button
         android:id="@+id/button_write_new_task"
-        android:text="Add New Task"
-        android:onClick="onNewTasksClick"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:elevation="4dp"
+        android:onClick="onNewTasksClick"
+        android:text="Add New Task"
+        app:layout_constraintBottom_toTopOf="@+id/button_see_all_tasks"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_welcome_text"
+        app:layout_constraintVertical_bias="0.121" />
 
     <Button
         android:id="@+id/button_see_all_tasks"
-        android:onClick="onSeeTasksClick"
-        android:text="See All Tasks"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:onClick="onSeeTasksClick"
+        android:text="See My Tasks"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="38dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -10,6 +10,7 @@
     <string name="search_hint">Search...</string>
     <string name="search_label">Search</string>
     <string name="search_global_description">Main Search</string>
+    <string name="welcome_text">Welcome to ToDo, your pocket task list! Easily manage your life with our simple app - manage tasks by priority or due date, then mark them as complete to tick a load off your shoulders!</string>
 
     <string-array name="priority_array">
         <item>HIGH</item>
