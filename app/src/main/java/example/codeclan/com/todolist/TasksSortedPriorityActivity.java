@@ -7,58 +7,53 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Switch;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import example.codeclan.com.todolist.R;
-import example.codeclan.com.todolist.TaskList;
-import example.codeclan.com.todolist.TasksAllListAdapter;
 import example.codeclan.com.todolist.database.DatabaseHandler;
 import example.codeclan.com.todolist.helpers.CompletedComparator;
-import example.codeclan.com.todolist.helpers.TimeStampComparator;
+import example.codeclan.com.todolist.helpers.ExpiryDateComparator;
+import example.codeclan.com.todolist.helpers.PriorityComparator;
 
-public class TasksAllListActivity extends AppCompatActivity {
-
-    private TaskList taskList;
+public class TasksSortedPriorityActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tasks_all_list);
-        setTitle("ToDo List > All");
-        Log.d(getClass().toString(), "onCreate for TasksAllListActivity");
+        setContentView(R.layout.activity_tasks_sorted_priority);
+
+        setTitle("ToDo List > Priority");
+        Log.d(getClass().toString(), "onCreate for TasksSortedPriorityActivity");
 
         DatabaseHandler db = new DatabaseHandler(this);
-
-        Log.d(getClass().toString(), "DB handler made");
         TaskList taskList = db.getTaskList();
-        Log.d(getClass().toString(), "tasklist made");
-//sort list
-        ArrayList<Task> taskListasArrayList = taskList.getList();
-        Collections.sort(taskListasArrayList, new TimeStampComparator());
-        Collections.sort(taskListasArrayList, new CompletedComparator());
 
+
+        ArrayList<Task> taskListasArrayList = taskList.getList();
+        Log.d(getClass().toString(), "got ArrayList<Task> size " + taskListasArrayList.size());
+
+        Collections.sort(taskListasArrayList, new PriorityComparator());
+        Collections.sort(taskListasArrayList, new CompletedComparator());
 
         Intent intent = getIntent();
 
         TasksAllListAdapter tasksAllListAdapter = new TasksAllListAdapter(this, taskListasArrayList);
 
-        ListView listView = (ListView) findViewById(R.id.tasks_all_list);
+        Log.d(getClass().toString(), "made Adapter");
+
+        ListView listView = (ListView) findViewById(R.id.tasks_sorted_priority_list);
 
         listView.setAdapter(tasksAllListAdapter);
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.all_list_menu, menu);
-        menu.findItem(R.id.all_list_menu_sort_all).setVisible(false);
+        menu.findItem(R.id.all_list_menu_sort_priority).setVisible(false);
+
         return true;
     }
 
@@ -69,17 +64,17 @@ public class TasksAllListActivity extends AppCompatActivity {
                 Intent i1 = new Intent(this,NewTaskActivity.class);
                 this.startActivity(i1);
                 return true;
-            case R.id.all_list_menu_sort_expiry:
-                Intent i2 = new Intent(this,TasksSortedExpiryActivity.class);
+            case R.id.all_list_menu_sort_all:
+                Intent i2 = new Intent(this,TasksAllListActivity.class);
                 this.startActivity(i2);
                 return true;
-            case R.id.all_list_menu_sort_priority:
-                Intent i3 = new Intent(this,TasksSortedPriorityActivity.class);
+            case R.id.all_list_menu_sort_expiry:
+                Intent i3 = new Intent(this,TasksSortedExpiryActivity.class);
                 this.startActivity(i3);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
 }
+

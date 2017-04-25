@@ -19,7 +19,10 @@
         <activity android:name=".TasksAllListActivity" />
         <activity android:name=".NewTaskActivity" />
         <activity android:name=".EditTaskActivity" />
-        <activity android:name=".TasksSortedExpiryActivity"></activity>
+        <activity android:name=".TasksSortedExpiryActivity" />
+        <activity android:name=".TasksSortedPriorityActivity" />
+
+
     </application>
 
 </manifest>

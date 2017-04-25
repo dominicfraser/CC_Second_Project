@@ -16,4 +16,8 @@
         android:id="@+id/all_list_menu_sort_expiry"
         android:title="@string/expiry_sorted" />
 
+    <item
+        android:id="@+id/all_list_menu_sort_priority"
+        android:title="Sort by Priority" />
+
 </menu>

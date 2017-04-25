@@ -64,6 +64,9 @@ public class TasksSortedExpiryActivity extends AppCompatActivity {
                 Intent i = new Intent(this,TasksAllListActivity.class);
                 this.startActivity(i);
                 return true;
+            case R.id.all_list_menu_sort_priority:
+                Intent i3 = new Intent(this,TasksSortedPriorityActivity.class);
+                this.startActivity(i3);
             default:
                 return super.onOptionsItemSelected(item);
         }
