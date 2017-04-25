@@ -163,7 +163,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 // SEARCH
     public TaskList search(String string){
         String query = "SELECT * FROM " + TABLE_TASKLIST + " WHERE " + KEY_SHORTDESCRIPTION + " LIKE '%"
-                + string + "%'";
+                + string + "%' OR " + KEY_LONGDESCRIPTION + " LIKE '%" + string + "%'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -174,11 +174,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     cursor.getString(2), cursor.getString(3), Enum.valueOf(PriorityLevel.class,
                     cursor.getString(4)), cursor.getInt(5)!=0, cursor.getLong(6)) );
         }
-
         cursor.close();
         return list;
-
-
     }
 
 

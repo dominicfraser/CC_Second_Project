@@ -34,7 +34,6 @@ public class Search extends Activity {
             String query = intent.getStringExtra(SearchManager.QUERY);
             doMySearch(query);
         }
-
     }
 
     private void doMySearch(String query) {
