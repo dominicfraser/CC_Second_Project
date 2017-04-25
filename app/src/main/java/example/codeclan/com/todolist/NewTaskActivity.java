@@ -9,7 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 
@@ -24,9 +25,10 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerDial
 
     private EditText short_description;
     private EditText long_description;
-    private Spinner priority_spinner;
     private TextView text_date_picker;
     private TextView text_date_picker_hidden;
+    private RadioGroup new_task_radio_button_group;
+    private RadioButton radioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +40,10 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerDial
 
         short_description = (EditText) findViewById(R.id.new_short_description);
         long_description = (EditText) findViewById(R.id.new_long_description);
-        priority_spinner = (Spinner) findViewById(R.id.new_priority);
         text_date_picker = (TextView) findViewById(R.id.text_date_picker);
         text_date_picker_hidden = (TextView) findViewById(R.id.text_date_picker_hidden);
+        new_task_radio_button_group = (RadioGroup) findViewById(R.id.new_task_radio_button_group);
+        new_task_radio_button_group.check(R.id.radio_medium_new);
         Log.d(getClass().toString(), "made views");
 
         long datemilliseconds = System.currentTimeMillis()+ (86400 * 7 * 1000);
@@ -52,20 +55,21 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerDial
         text_date_picker_hidden.setText(String.valueOf(datemilliseconds));
         Log.d(getClass().toString(), "set default date");
 
-
-
         UIHelper.hideKeyBoardWhenNotFocused(this, short_description);
         UIHelper.hideKeyBoardWhenNotFocused(this, long_description);
     }
 
     public void onSaveNewTaskClick(View view){
-        String priority = priority_spinner.getSelectedItem().toString();
-        Log.d(getClass().toString(), "got priority " + priority);
+        int selectedPri = new_task_radio_button_group.getCheckedRadioButtonId();
+        radioButton = (RadioButton) findViewById(selectedPri);
+        String selectedPriString = radioButton.getText().toString().toUpperCase();
+        PriorityLevel priorit = Enum.valueOf(PriorityLevel.class, selectedPriString);
+
+        Log.d(getClass().toString(), "got priority " + selectedPriString);
 
 
         String short_descript = short_description.getText().toString();
         String long_descript = long_description.getText().toString();
-        PriorityLevel priorit = Enum.valueOf(PriorityLevel.class, priority.toString());
         long expiryDt = Long.valueOf(text_date_picker_hidden.getText().toString()).longValue();
 
         Log.d(getClass().toString(), short_descript + "priority: " + priorit + "long" + expiryDt );
