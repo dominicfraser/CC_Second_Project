@@ -7,6 +7,9 @@
     <string name="snackbar_text_undo">Undo</string>
     <string name="expiry_sorted">Sort by Expiry</string>
     <string name="all_sorted">Sort by Date Added</string>
+    <string name="search_hint">Search...</string>
+    <string name="search_label">Search</string>
+    <string name="search_global_description">Main Search</string>
 
     <string-array name="priority_array">
         <item>HIGH</item>

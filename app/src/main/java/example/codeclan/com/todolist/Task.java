@@ -23,7 +23,6 @@ public class Task {
     public Task(long id, long timeStamp, String shortDescription, String longDescription, PriorityLevel priority,
                 boolean completed, long expiryDate) {
         this.id = id;
-        Log.d("AHHH", "Time: " + timeStamp);
         this.timeStamp = timeStamp;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;

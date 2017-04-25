@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_search"
+        android:title="Search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/all_list_new_task"
         android:title="Add New Task"
         android:icon="@drawable/ic_plus"
