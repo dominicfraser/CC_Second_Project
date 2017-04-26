@@ -35,29 +35,26 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerDial
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
 
+        setTitle("ToDo List > New");
+
+        Log.d(getClass().toString(), "onCreate for NewTaskActivity");
+
         short_description = (EditText) findViewById(R.id.new_short_description);
         long_description = (EditText) findViewById(R.id.new_long_description);
+        text_date_picker = (TextView) findViewById(R.id.text_date_picker);
+        text_date_picker_hidden = (TextView) findViewById(R.id.text_date_picker_hidden);
+        new_task_radio_button_group = (RadioGroup) findViewById(R.id.new_task_radio_button_group);
+        new_task_radio_button_group.check(R.id.radio_medium_new);
+        Log.d(getClass().toString(), "made views");
 
-//        setTitle("ToDo List > New");
-//
-//        Log.d(getClass().toString(), "onCreate for NewTaskActivity");
-//
-//        short_description = (EditText) findViewById(R.id.new_short_description);
-//        long_description = (EditText) findViewById(R.id.new_long_description);
-//        text_date_picker = (TextView) findViewById(R.id.text_date_picker);
-//        text_date_picker_hidden = (TextView) findViewById(R.id.text_date_picker_hidden);
-//        new_task_radio_button_group = (RadioGroup) findViewById(R.id.new_task_radio_button_group);
-//        new_task_radio_button_group.check(R.id.radio_medium_new);
-//        Log.d(getClass().toString(), "made views");
-//
-//        long datemilliseconds = System.currentTimeMillis()+ (86400 * 7 * 1000);
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-//        Date resultdate = new Date(datemilliseconds);
-//        String formattedDate = sdf.format(resultdate);
-//    // set default date to one week after todays date
-//        text_date_picker.setText(formattedDate);
-//        text_date_picker_hidden.setText(String.valueOf(datemilliseconds));
-//        Log.d(getClass().toString(), "set default date");
+        long datemilliseconds = System.currentTimeMillis()+ (86400 * 7 * 1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date resultdate = new Date(datemilliseconds);
+        String formattedDate = sdf.format(resultdate);
+    // set default date to one week after todays date
+        text_date_picker.setText(formattedDate);
+        text_date_picker_hidden.setText(String.valueOf(datemilliseconds));
+        Log.d(getClass().toString(), "set default date");
 
         UIHelper.hideKeyBoardWhenNotFocused(this, short_description);
         UIHelper.hideKeyBoardWhenNotFocused(this, long_description);

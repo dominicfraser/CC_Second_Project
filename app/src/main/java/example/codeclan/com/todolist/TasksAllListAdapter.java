@@ -138,6 +138,8 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
             @Override
             public void onClick(View v) {
                 db.addTask(task_in_db);
+                Intent redirectDeleteUndo = new Intent(parent.getContext(), TasksAllListActivity.class);
+                parent.getContext().startActivity(redirectDeleteUndo);
                 Log.d(getClass().toString(), String.valueOf(task_in_db.getId()));
                 Log.d(getClass().toString(), String.valueOf(task.getId()));
             }
@@ -150,6 +152,8 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
                 Snackbar.make(vi, "Task deleted", Snackbar.LENGTH_LONG)
                         .setAction("UNDO", myCLDeleteSnackbar)
                         .show();
+                edit_in_all_list.setImageResource(R.drawable.ic_edit_grey);
+                edit_in_all_list.setClickable(false);
             }
         });
 
