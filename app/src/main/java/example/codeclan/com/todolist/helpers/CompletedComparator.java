@@ -5,7 +5,7 @@ import java.util.Comparator;
 import example.codeclan.com.todolist.Task;
 
 /**
- * Created by user on 24/04/2017.
+ * Created by Dominic on 24/04/2017.
  */
 
 public class CompletedComparator implements Comparator<Task> {

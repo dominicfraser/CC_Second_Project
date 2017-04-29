@@ -45,9 +45,10 @@ public class Search extends AppCompatActivity {
     private void doMySearch(String query) {
         db = new DatabaseHandler(this);
         Log.d(getClass().toString(), "DB handler made");
-        Log.d(getClass().toString(), "Running search...");
 
         TaskList taskList = db.search(query);
+        Log.d(getClass().toString(), "Running search...");
+
         Log.d(getClass().toString(), "tasklist made");
 
         ArrayList<Task> taskListAsArrayList = taskList.getList();
