@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.content.Intent;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ class TasksAllListAdapter extends ArrayAdapter<Task> {
     @Override
     public View getView(final int position, View listItemView, final ViewGroup parent) {
         if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.task_in_list, parent, false);
+            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.task_in_list_old, parent, false);
         }
         Log.d(getClass().toString(), "getView for TasksAllListAdapter");
 //        set up tasks and db

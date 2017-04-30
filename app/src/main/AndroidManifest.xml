@@ -13,13 +13,7 @@
             android:name="android.app.default_searchable"
             android:value=".Search" />
 
-        <activity android:name=".MainMenuActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainMenuActivity" />
 
         <activity android:name=".Search">
             <intent-filter>
@@ -31,7 +25,13 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <activity android:name=".TasksAllListActivity"/>
+        <activity android:name=".TasksAllListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".NewTaskActivity" />
         <activity android:name=".EditTaskActivity" />
         <activity android:name=".TasksSortedExpiryActivity" />
